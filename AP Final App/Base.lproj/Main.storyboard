@@ -47,6 +47,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ8-RE-yOK">
+                                <rect key="frame" x="16" y="295" width="361" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -54,6 +61,7 @@
                     <connections>
                         <outlet property="myLabel" destination="RKI-LV-ZvP" id="gvF-5L-OIH"/>
                         <outlet property="myLabel2" destination="fjp-HP-Fwi" id="tip-6A-KlS"/>
+                        <outlet property="scoreLabel" destination="vQ8-RE-yOK" id="7Gh-XU-gQs"/>
                         <outlet property="textField" destination="9zO-pm-b5V" id="MIz-WW-8Vr"/>
                     </connections>
                 </viewController>
