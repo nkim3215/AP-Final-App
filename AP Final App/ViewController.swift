@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Multiple Choice Quiz!"
         displayCurrentQuestion()
     }
     
@@ -59,6 +60,7 @@ class ViewController: UIViewController {
             } else {
                 self.myLabel.text = "Quiz completed"
                 self.myLabel2.text = nil
+                self.scoreLabel.text = "Your final score is \(self.score)/3"
             }
         }
         alert.addAction(dismiss)
@@ -69,7 +71,7 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Incorrect!", message: nil, preferredStyle: .alert)
         let dismiss = UIAlertAction(title: "Next Question", style: .default) { (action) in
             print("User tapped on dismiss")
-            self.view.backgroundColor = UIColor.red
+            self.view.backgroundColor = .white
             self.currentQuestionIndex += 1
             if self.currentQuestionIndex < self.questions.count {
                 self.displayCurrentQuestion()
@@ -77,7 +79,7 @@ class ViewController: UIViewController {
                 self.myLabel.text = "Quiz completed"
                 self.myLabel2.text = nil
                 self.textField.text = ""
-                
+                self.scoreLabel.text = "Your final score is \(self.score)/3"
             }
         }
         alert.addAction(dismiss)
@@ -85,34 +87,28 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
-        let currentQuestion = questions[currentQuestionIndex]
-        let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
-        if textField.text == answer {
-            textField.text = ""
-            self.view.backgroundColor = .green
-            alertCorrect()
-            score += 1
+        for x in questions {
+//            let currentQuestion = questions[currentQuestionIndex]
+            let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
+            if textField.text == answer {
+                textField.text = ""
+                view.backgroundColor = .green
+                alertCorrect()
+                score += 1
+            }
+            else {
+                alertIncorrect()
+                
+                textField.text = ""
+            }
         }
-        else {
-            alertIncorrect()
-            textField.text = ""
+        
+        for x in questions {
+            
         }
     }
 }
-//import UIKit
-//
-//class ViewController: UIViewController {
-//
-//    @IBOutlet weak var myLabel: UILabel!
-//    @IBOutlet weak var myLabel2: UILabel!
-//
-//    @IBOutlet weak var textField: UITextField!
-//
-//    var questions = [1, 2, 3]
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//    }
+
 //    func Question1() {
 //        myLabel.text = "What is 5 + 5"
 //        myLabel2.text = "A) 5 \nB) 10 \nC) 30 \nD) Blueberry"
@@ -124,27 +120,6 @@ class ViewController: UIViewController {
 //    func Question3() {
 //        myLabel.text = "What is 9 - 3"
 //        myLabel2.text = "A) 13 \nB) 21 \nC) 7 \nD) 10"
-//    }
-//
-//
-//
-//    func alertCorrect() {
-//        let alert = UIAlertController(title: title, message: "Correct!", preferredStyle: .alert)
-//        let dismiss = UIAlertAction(title: "Next Question", style: .default) { (action) in
-//            print("User tapped on dismiss")
-//            self.view.backgroundColor = UIColor.white
-//        }
-//        alert.addAction(dismiss)
-//        present(alert, animated: true, completion: nil)
-//    }
-//    func alertIncorrect() {
-//        let alert = UIAlertController(title: title, message: "Incorrect!", preferredStyle: .alert)
-//        let dismiss = UIAlertAction(title: "Next Question", style: .default) { (action) in
-//            print("User tapped on dismiss")
-//            self.view.backgroundColor = UIColor.white
-//        }
-//        alert.addAction(dismiss)
-//        present(alert, animated: true, completion: nil)
 //    }
 //
 //    @IBAction func submitButton(_ sender: UIButton) {
