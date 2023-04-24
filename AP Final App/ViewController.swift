@@ -12,7 +12,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var myLabel2: UILabel!
     @IBOutlet weak var textField: UITextField!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var scoreLabel: UILabel!
+    
+    
     
     struct Question {
         var question: String = ""
@@ -29,8 +33,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Multiple Choice Quiz!"
         displayCurrentQuestion()
+        titleLabel.text = "Multiple Choice Quiz! \nRemember to enter your answers with capital letters"
     }
     
     func displayCurrentQuestion() {
@@ -59,7 +63,7 @@ class ViewController: UIViewController {
                 self.displayCurrentQuestion()
             } else {
                 self.myLabel.text = "Quiz completed"
-                self.myLabel2.text = nil
+                self.myLabel2.text = ""
                 self.scoreLabel.text = "Your final score is \(self.score)/3"
             }
         }
@@ -76,10 +80,10 @@ class ViewController: UIViewController {
             if self.currentQuestionIndex < self.questions.count {
                 self.displayCurrentQuestion()
             } else {
-                self.myLabel.text = "Quiz completed"
-                self.myLabel2.text = nil
+                self.myLabel.text = "Quiz Completed!"
+                self.myLabel2.text = ""
                 self.textField.text = ""
-                self.scoreLabel.text = "Your final score is \(self.score)/3"
+                self.scoreLabel.text = "Your final score is \(self.score)/3!"
             }
         }
         alert.addAction(dismiss)
@@ -88,7 +92,6 @@ class ViewController: UIViewController {
     
     @IBAction func submitButton(_ sender: UIButton) {
         for x in questions {
-//            let currentQuestion = questions[currentQuestionIndex]
             let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
             if textField.text == answer {
                 textField.text = ""
@@ -98,7 +101,6 @@ class ViewController: UIViewController {
             }
             else {
                 alertIncorrect()
-                
                 textField.text = ""
             }
         }
@@ -108,34 +110,4 @@ class ViewController: UIViewController {
         }
     }
 }
-
-//    func Question1() {
-//        myLabel.text = "What is 5 + 5"
-//        myLabel2.text = "A) 5 \nB) 10 \nC) 30 \nD) Blueberry"
-//    }
-//    func Question2() {
-//        myLabel.text = "What is 4 * 8"
-//        myLabel2.text = "A) 32 \nB) 2 \nC) 24 \nD) 100"
-//    }
-//    func Question3() {
-//        myLabel.text = "What is 9 - 3"
-//        myLabel2.text = "A) 13 \nB) 21 \nC) 7 \nD) 10"
-//    }
-//
-//    @IBAction func submitButton(_ sender: UIButton) {
-//
-//        for x in questions {
-//            if textField.text == "A" {
-//                textField.text = ""
-//                self.view.backgroundColor = UIColor.green
-//                alertCorrect()
-//            }
-//            else {
-//                textField.text = ""
-//                alertIncorrect()
-//            }
-//        }
-//    }
-//
-//}
 
