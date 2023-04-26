@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         Question(question: "What is 4 * 8"),
         Question(question: "What is 9 - 3")
     ]
+    var numArray = [1, 2, 3]
     
     var currentQuestionIndex = 0
     var score = 0
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
     }
     
     func displayCurrentQuestion() {
+        
         let currentQuestion = questions[currentQuestionIndex]
         myLabel.text = currentQuestion.question
         
@@ -91,23 +93,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
-        for x in questions {
-            let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
-            if textField.text == answer {
-                textField.text = ""
-                view.backgroundColor = .green
-                alertCorrect()
-                score += 1
+        let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
+        if textField.text == answer {
+            textField.text = ""
+            view.backgroundColor = .green
+            alertCorrect()
+            score += 1
+            
+            var x = 0
+            while x < questions.count {
+                titleLabel.text = "\(score)/3"
+                x += 1
             }
-            else {
-                alertIncorrect()
-                textField.text = ""
-            }
+        }
+        else {
+            alertIncorrect()
+            textField.text = ""
         }
         
-        for x in questions {
-            
-        }
     }
 }
 
