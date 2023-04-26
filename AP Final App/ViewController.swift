@@ -66,7 +66,8 @@ class ViewController: UIViewController {
             } else {
                 self.myLabel.text = "Quiz completed"
                 self.myLabel2.text = ""
-                self.scoreLabel.text = "Your final score is \(self.score)/3"
+                self.textField.text = ""
+                self.scoreLabel.text = "Your final score is \(self.score)/\(self.questions.count)"
             }
         }
         alert.addAction(dismiss)
@@ -85,7 +86,7 @@ class ViewController: UIViewController {
                 self.myLabel.text = "Quiz Completed!"
                 self.myLabel2.text = ""
                 self.textField.text = ""
-                self.scoreLabel.text = "Your final score is \(self.score)/3!"
+                self.scoreLabel.text = "Your final score is \(self.score)/\(self.questions.count)!"
             }
         }
         alert.addAction(dismiss)
@@ -93,24 +94,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
-        let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
-        if textField.text == answer {
-            textField.text = ""
-            view.backgroundColor = .green
-            alertCorrect()
-            score += 1
-            
-            var x = 0
-            while x < questions.count {
-                titleLabel.text = "\(score)/3"
-                x += 1
+        var x = 0
+        while x < questions.count {
+            let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
+            if textField.text == answer {
+                textField.text = ""
+                view.backgroundColor = .green
+                alertCorrect()
+                score += 1
             }
+            else {
+                alertIncorrect()
+                textField.text = ""
+            }
+            titleLabel.text = "\(score)/\(questions.count)"
+            x += 1
         }
-        else {
-            alertIncorrect()
-            textField.text = ""
-        }
-        
     }
 }
 
