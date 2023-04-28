@@ -16,8 +16,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
-    
-    
     struct Question {
         var question: String = ""
     }
@@ -27,9 +25,8 @@ class ViewController: UIViewController {
         Question(question: "What is 4 * 8"),
         Question(question: "What is 9 - 3")
     ]
-    var numArray = [1, 2, 3]
     
-    var currentQuestionIndex = 0
+    var currentQuestionNum = 0
     var score = 0
     
     override func viewDidLoad() {
@@ -40,10 +37,10 @@ class ViewController: UIViewController {
     
     func displayCurrentQuestion() {
         
-        let currentQuestion = questions[currentQuestionIndex]
+        let currentQuestion = questions[currentQuestionNum]
         myLabel.text = currentQuestion.question
         
-        switch currentQuestionIndex {
+        switch currentQuestionNum {
         case 0:
             myLabel2.text = "A) 5 \nB) 10 \nC) 30 \nD) 4000"
         case 1:
@@ -58,16 +55,15 @@ class ViewController: UIViewController {
     func alertCorrect() {
         let alert = UIAlertController(title: "Correct!", message: nil, preferredStyle: .alert)
         let dismiss = UIAlertAction(title: "Next Question", style: .default) { (action) in
-            print("User tapped on dismiss")
-            self.view.backgroundColor = UIColor.white
-            self.currentQuestionIndex += 1
-            if self.currentQuestionIndex < self.questions.count {
+            self.view.backgroundColor = .white
+            self.currentQuestionNum += 1
+            if self.currentQuestionNum < self.questions.count {
                 self.displayCurrentQuestion()
             } else {
-                self.myLabel.text = "Quiz completed"
+                self.myLabel.text = "Quiz completed!"
                 self.myLabel2.text = ""
                 self.textField.text = ""
-                self.scoreLabel.text = "Your final score is \(self.score)/\(self.questions.count)"
+                self.scoreLabel.text = "Your final score is \(self.score)/\(self.questions.count)!"
             }
         }
         alert.addAction(dismiss)
@@ -77,10 +73,9 @@ class ViewController: UIViewController {
     func alertIncorrect() {
         let alert = UIAlertController(title: "Incorrect!", message: nil, preferredStyle: .alert)
         let dismiss = UIAlertAction(title: "Next Question", style: .default) { (action) in
-            print("User tapped on dismiss")
             self.view.backgroundColor = .white
-            self.currentQuestionIndex += 1
-            if self.currentQuestionIndex < self.questions.count {
+            self.currentQuestionNum += 1
+            if self.currentQuestionNum < self.questions.count {
                 self.displayCurrentQuestion()
             } else {
                 self.myLabel.text = "Quiz Completed!"
@@ -96,7 +91,15 @@ class ViewController: UIViewController {
     @IBAction func submitButton(_ sender: UIButton) {
         var x = 0
         while x < questions.count {
-            let answer = currentQuestionIndex == 0 ? "B" : currentQuestionIndex == 1 ? "A" : "C"
+            var answer = ""
+            if currentQuestionNum == 0 {
+              answer = "B"
+            } else if currentQuestionNum == 1 {
+              answer = "A"
+            } else {
+              answer = "C"
+            }
+            
             if textField.text == answer {
                 textField.text = ""
                 view.backgroundColor = .green
@@ -107,7 +110,7 @@ class ViewController: UIViewController {
                 alertIncorrect()
                 textField.text = ""
             }
-            titleLabel.text = "\(score)/\(questions.count)"
+            titleLabel.text = "Score: \(score)/\(questions.count)"
             x += 1
         }
     }
